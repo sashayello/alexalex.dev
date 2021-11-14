@@ -15,16 +15,26 @@ import {
     useColorModeValue
 } from "@chakra-ui/react"
 import { HamburgerIcon } from '@chakra-ui/icons'
+import ThemeToggleButton from './theme-toggle-button'
 
 const LinkItem = ({ href, path, children }) => {
     const active = path === href
-    const inActiveColor = useColorModeValue('gray200', 'whiteAlpha.900')
+    const inActiveColor = useColorModeValue('gray.500', 'whiteAlpha.900')
     return (
         <NextLink href={href}>
             <Link
-                p={2}
+                p={1}
+                pl={3}
+                pr={3}
                 bg={active ? 'glassTeal' : undefined}
                 color={active ? '#202023' : inActiveColor}
+                borderRadius={6}
+                fontSize={16}
+                fontWeight={500}
+                fontFamily="IBM Plex Sans"
+                style={{ textDecoration: 'none' }}
+                transition={{ duration: .2, type: 'easeInOut' }}
+                _hover={{ bgColor: 'glassTeal', color: useColorModeValue('gray.900', 'whiteAlpha.100') }}
             >
                 {children}
             </Link>
@@ -39,7 +49,7 @@ const Navbar = props => {
             position="fixed"
             as="nav"
             w="100%"
-            bg={useColorModeValue('#ffffff40', '#20202380')}
+            bg={useColorModeValue('#ffffff40', '#111111')}
             style={{
                 backdropFilter: 'blur(10px)'
             }}
@@ -53,18 +63,13 @@ const Navbar = props => {
                 wrap="wrap"
                 align="center"
                 justify="space-between">
-                <Flex align="cnter" mr={5}>
-                    <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-                        <Logo />
-                    </Heading>
-                </Flex>
                 <Stack
                     direction={{ base: 'column', md: 'row' }}
                     display={{ base: 'none', md: 'flex' }}
                     width={{ base: 'full', md: 'auto' }}
                     alignItems="center"
                     flexGrow={1}
-                    mt={{ base: 4, nmd: 0 }}
+                    mt={{ base: 5, nmd: 0 }}
                 >
                     <LinkItem href="/" path={path}>
                         Home
@@ -72,11 +77,9 @@ const Navbar = props => {
                     <LinkItem href="/about" path={path}>
                         About
                     </LinkItem>
-                    <LinkItem href="/snippets" path={path}>
-                        Snippets
-                    </LinkItem>
                 </Stack>
                 <Box flex={1} align="right">
+                    <ThemeToggleButton />
                     <Box
                         ml={2}
                         display={{ base: 'inline-block', md: 'none' }}
@@ -89,9 +92,6 @@ const Navbar = props => {
                                 </NextLink>
                                 <NextLink href="/about" passHref>
                                     <MenuItem as={Link}>About</MenuItem>
-                                </NextLink>
-                                <NextLink href="/snippets" passHref>
-                                    <MenuItem as={Link}>Snippets</MenuItem>
                                 </NextLink>
                             </MenuList>
                         </Menu>
