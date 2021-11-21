@@ -44,7 +44,7 @@ const Page = () => {
           </Heading>
           <BioSection borderBottomWidth={1} mb={2}>
             <BioYear>1991</BioYear>
-            Born in Chernihiv, Ukraine. 🍼
+            Born in Chernihiv, Ukraine. 🥺
           </BioSection>
           <BioSection borderBottomWidth={1} mb={2}>
             <BioYear>2011</BioYear>
